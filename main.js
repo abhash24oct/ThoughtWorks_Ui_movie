@@ -1,5 +1,6 @@
 var movieList=[];
 var images=[];
+var searchMoviesList=[];
 function getMovieList(url){
     
     if(window.XMLHttpRequest){
@@ -136,22 +137,24 @@ function displayMovieList(displayList){
         displayImages(displayList[i]["movie_title"],i);
 
     }
+    
 }
 
-function searchMovies(movieStr){
+function searchMovies(movieStr){    
 
-    var searchMovies =[];
-
+    
+   console.log(movieStr);
     for (var i in movieList){
 
         if(movieList[i]["movie_title"].includes(movieStr)){
-            searchMovies.push(movieList[i]);
+            searchMoviesList.push(movieList[i]);
         }
         
     }
 
-    console.log(searchMovies);
-    displayMovieList(searchMovies);
+    console.log(searchMoviesList);
+    
+    displayMovieList(searchMoviesList);
     
     
 }
@@ -169,20 +172,29 @@ document.addEventListener("DOMContentLoaded",function(){
         console.log("Something entered");
 
         if((movieInput.value).length>=4){
+            searchMoviesList=[];
             searchMovies(movieInput.value);
         }else{
+            searchMoviesList=[];
             displayMovieList(movieList);
         }
 
 
     });
 
-    /*var sortForm= document.getElementById("sortForm");
+    var sortbyYear= document.getElementById("sortbyYear");
 
-    sortForm.addEventListener("click",function(){
+    sortbyYear.addEventListener("click",function(){
            console.log("Sort the elemnts");
+           sortElements("year");
     });
-    */
+    
+    var sortbyCountry= document.getElementById("sortbyCountry");
+
+    sortbyCountry.addEventListener("click",function(){
+           console.log("Sort the elemnts ");
+           sortElements("country");
+    });
    
 
 })
@@ -197,4 +209,56 @@ function displayImages(movietitle,i){
             document.getElementsByClassName("movieBox")[i].style.backgroundImage="url("+embeddedUrl+")";
         }
     
+}
+
+function sortElements(attrib){
+
+    
+    if(searchMoviesList==""){
+
+        if(attrib=="year"){
+            movieList.sort(function (a, b) {
+                return a.title_year - b.title_year;
+            })    
+        } else{
+            movieList.sort(function (a, b) {
+                var nameA = a.country.toUpperCase(); 
+                var nameB = b.country.toUpperCase(); 
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                 // names must be equal
+                return 0;
+            }
+        )  
+        }
+        console.log(movieList); 
+        displayMovieList(movieList);
+    }else{
+        if(attrib=="year"){
+            searchMoviesList.sort(function (a, b) {
+                return a.title_year - b.title_year;
+            })    
+        } else{
+            searchMoviesList.sort(function (a, b) {
+                var nameA = a.country.toUpperCase(); 
+                var nameB = b.country.toUpperCase(); 
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                 // names must be equal
+                return 0;
+            }
+        )  
+        }
+        console.log(searchMoviesList); 
+        displayMovieList(searchMoviesList);
+       
+    }
 }

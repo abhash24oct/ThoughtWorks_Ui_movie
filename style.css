@@ -76,3 +76,9 @@ input#filter{
 input{
     padding: 2px;
 }
+#sortbyYear{
+    float: left;
+}
+#sortbyCountry{
+    float: left;
+}
