@@ -67,6 +67,8 @@ function displayMovieList(displayList){
         var div = document.createElement("div");
         div.setAttribute("class","movieBox");
 
+        var contentdiv = document.createElement("div");
+        contentdiv.setAttribute("class","textdiv");
         //Movie title 
         var header = document.createElement("h4");
         var movieTitle= document.createTextNode(displayList[i]["movie_title"]);
@@ -78,57 +80,57 @@ function displayMovieList(displayList){
         imdbLink.setAttribute("target","_blank");
         header.appendChild(movieTitle);
         imdbLink.appendChild(header);
-        div.appendChild(imdbLink);
+        contentdiv.appendChild(imdbLink);
 
         var line = document.createElement("hr");
-        div.appendChild(line);
+        contentdiv.appendChild(line);
 
         //Movie Actors
         var actors= document.createTextNode(displayList[i]["actor_1_name"]+","+displayList[i]["actor_2_name"]);
-        div.appendChild(actors);
+        contentdiv.appendChild(actors);
         
 
         var p = document.createElement("p");
-        div.appendChild(p);
+        contentdiv.appendChild(p);
 
         //Movie director
         var director= document.createTextNode(displayList[i]["director_name"]);
-        div.appendChild(director);
+        contentdiv.appendChild(director);
 
         var p = document.createElement("p");
-        div.appendChild(p);
+        contentdiv.appendChild(p);
 
         //Genres
         var genres= document.createTextNode(displayList[i]["genres"]);
-        div.appendChild(genres);
+        contentdiv.appendChild(genres);
 
         var p = document.createElement("p");
-        div.appendChild(p);
+        contentdiv.appendChild(p);
 
         //Language ,Country year
         if(displayList[i]["language"] !="" || displayList[i]["title_year"] != "" || displayList[i]["country"]!=""){
             var langCountryYear= document.createTextNode(displayList[i]["language"]+"|"+displayList[i]["title_year"]+"|"+movieList[i]["country"]);
-            div.appendChild(langCountryYear);
+            contentdiv.appendChild(langCountryYear);
         }
 
         var br1 = document.createElement("br");
-        div.appendChild(br1);
+        contentdiv.appendChild(br1);
 
          var br2 = document.createElement("br");
-        div.appendChild(br2);
+         contentdiv.appendChild(br2);
 
          var br3 = document.createElement("br");
-        div.appendChild(br3);
+         contentdiv.appendChild(br3);
 
 
          var line2 = document.createElement("hr");
-        div.appendChild(line2);
+         contentdiv.appendChild(line2);
 
         //plot_keywords
         var plotKeywords= document.createTextNode(displayList[i]["plot_keywords"]);
-        div.appendChild(plotKeywords);
+        contentdiv.appendChild(plotKeywords);
 
-
+        div.appendChild(contentdiv);
         containerDiv.appendChild(div);
 
         displayImages(displayList[i]["movie_title"],i);
